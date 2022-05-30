@@ -1,0 +1,79 @@
+
+ScreenManager:
+    # LoginScreen:
+    ScannerScreen:
+    QRScreen:
+
+
+<LoginScreen>:
+    name: 'login'
+    MDScreen:
+        md_bg_color: 60/255, 179/255, 113/255, 1
+
+    Image: 
+        source: 'images/gflo.png'
+        pos_hint: {"center_x": 0.5, "center_y": 0.75}
+        size_hint_y: None
+        height:dp(100)
+
+        # width: 10
+        # height: dp(100)
+        allow_stretch: True
+    MDTextFieldRound:
+        id: username
+        hint_text: 'Username'
+        pos_hint: {"center_x": 0.5, "center_y": 0.55}
+        size_hint: .75,0.08
+        color_mode: 'accent'
+        icon_left: "account-check"
+        hint_text: "Username"
+    MDTextFieldRound:
+        id: password  
+        icon_left: "key-variant"
+        icon_right: 'eye-off'
+        hint_text: 'Password'
+        pos_hint: {"center_x": 0.5, "center_y": 0.45}
+        size_hint: .75,0.08
+        color_mode: 'accent'
+        password: True
+
+    MDLabel:
+        id: status
+        text: ''
+        halign: 'center'
+        pos_hint: {"center_y": 0.35}
+    
+    MDRaisedButton:
+        text: 'Sign In'
+        pos_hint: {"center_x": 0.5, "center_y": 0.25}
+        on_press: 
+            app.sign_in()
+
+<ScannerScreen>:
+    name: 'scanner'
+    ZBarCam:
+        id: zbarcam_id
+    MDLabel:
+        id:data
+        text: "No Document Available"
+        pos_hint: {'center_x':0.5,'center_y':0.8}
+        theme_text_color: "Custom"
+        text_color: 0, 1, 0, 1  
+
+<QRScreen>:
+    name: 'qr'
+    # MDScreen:
+    #     md_bg_color: 60/255, 179/255, 113/255, 1
+    MDIconButton:
+        icon:'arrow-left'
+        pos_hint: {'center_x':0.1,'center_y':0.95}
+        on_press: 
+            root.manager.current = 'scanner'
+            root.manager.transition.direction = "right"
+
+    MDLabel:
+        id:data
+        text: "No Document Available"
+        pos_hint: {'center_x':0.5,'center_y':0.5}
+        theme_text_color: "Custom"
+        text_color: 0, 1, 0, 1  
